@@ -56,7 +56,7 @@ public class APerceptron extends Thread
 		if(index < input.size())
 			input.set(index, value);
 		else
-			System.out.println("index "+ Double.toString(index) +" not exists");
+			System.out.println("index "+ Integer.toString(index) +" not exists");
 	}
 	
 	public Double GetInput(int index)
@@ -65,7 +65,7 @@ public class APerceptron extends Thread
 			return input.get(index);
 		else
 		{
-			System.out.println("index "+ Double.toString(index) +" not exists");
+			System.out.println("index "+ Integer.toString(index) +" not exists");
 			return null;
 		}
 	}
