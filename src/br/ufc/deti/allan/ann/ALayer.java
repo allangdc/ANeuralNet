@@ -66,7 +66,7 @@ public class ALayer
 	
 	public void Process()
 	{
-		for(int i=0; i<perceptrons.size(); i++)
+		for(int i=0; i<GetNPerceptrons(); i++)
 		{
 			APerceptron p = GetPerceptron(i);
 			p.start();

@@ -17,6 +17,8 @@ public class APerceptron extends Thread
 	private Double output;
 	private Semaphore semaphore;
 	private boolean processed;
+	private Random rnd;
+	private double bias=0;
 	
 	public APerceptron()
 	{
@@ -24,6 +26,7 @@ public class APerceptron extends Thread
 		input = new ArrayList<Double>();
 		semaphore = null;
 		processed=false;
+		rnd = new Random();
 	}
 
 	public APerceptron(APerceptron perceptron)
@@ -47,36 +50,35 @@ public class APerceptron extends Thread
 		this.semaphore = semaphore;
 	}
 	
-	private void InitBias(Double value)
-	{
-		input.add(0, value);
-		processed=false;
-	}
-	
 	public void SetNInputs(int numberInputs)
 	{
 		input.clear();
 		for(int i=0; i<numberInputs; i++)
 			input.add(null);
-		InitBias(null);
 		processed=false;
 	}
 	
 	public int GetNInputs()
 	{
+		System.out.println("SIZE="+Integer.toString(input.size()));
 		return input.size();
 	}
 	
-	public void Init(int numberInputs)
+	public void Init()
 	{
-		SetNInputs(numberInputs);
-		Random rnd = new Random();
 		for(int i=0; i<input.size(); i++)
 		{
 			double x = rnd.nextDouble()*2-1;
 			SetInput(i, 2*x);
 		}
+		bias = rnd.nextDouble()*2-1;
 		processed=false;
+	}
+	
+	public void Init(int numberInputs)
+	{
+		SetNInputs(numberInputs);
+		Init();
 	}
 	
 	public void SetInput(int index, double value)
@@ -117,7 +119,7 @@ public class APerceptron extends Thread
 		{
 			if(semaphore!=null)
 				semaphore.acquire();
-			double sum=0;
+			double sum=bias;
 			for(int i=0; i<input.size(); i++)
 			{
 				sum += GetInput(i);
