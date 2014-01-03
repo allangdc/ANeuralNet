@@ -8,27 +8,40 @@ import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 /**
+ * This class implements the operation of a single neuron.
+ * The basis for the neural networks.
+ * 
  * @author Allan
- *
+ * 
  */
 public class APerceptron extends Thread 
 {
 	private ArrayList<Double> input;
+	private ArrayList<Double> weight;
 	private Double output;
 	private Semaphore semaphore;
 	private boolean processed;
 	private Random rnd;
 	private double bias=0;
 	
+	/**
+	 * The constructor
+	 */
 	public APerceptron()
 	{
 		super();
 		input = new ArrayList<Double>();
+		weight = new ArrayList<Double>();
 		semaphore = null;
 		processed=false;
 		rnd = new Random();
 	}
 
+	/**
+	 * The copy constructor
+	 * 
+	 * @param perceptron
+	 */
 	public APerceptron(APerceptron perceptron)
 	{
 		super();
@@ -40,16 +53,34 @@ public class APerceptron extends Thread
 		processed = perceptron.IsProcessed();
 	}
 	
+	/**
+	 * Informs if the perceptron has processed its inputs.
+	 * 
+	 * @return boolean
+	 * @author Allan
+	 */
 	public boolean IsProcessed()
 	{
 		return processed;
 	}
 	
+	/**
+	 * Loads a semaphore object. Useful for managing the processing of several perceptrons.
+	 * 
+	 * @param semaphore
+	 * @author Allan
+	 */
 	public void SetSemaphore(Semaphore semaphore)
 	{
 		this.semaphore = semaphore;
 	}
 	
+	/**
+	 * Allocates a certain number of inputs to the perceptron.
+	 * 
+	 * @param numberInputs
+	 * @author Allan
+	 */
 	public void SetNInputs(int numberInputs)
 	{
 		input.clear();
@@ -58,6 +89,12 @@ public class APerceptron extends Thread
 		processed=false;
 	}
 	
+	/**
+	 * Informs how many inputs were allocated.
+	 * 
+	 * @return int - size of vector
+	 * @author Allan
+	 */
 	public int GetNInputs()
 	{
 		System.out.println("SIZE="+Integer.toString(input.size()));
