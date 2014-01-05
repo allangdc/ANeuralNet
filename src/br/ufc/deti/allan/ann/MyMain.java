@@ -22,10 +22,10 @@ public class MyMain
 			layer1.SetPerceptrons(i, p[i]);
 		}
 		layer1.Process();
+		while(!layer1.IsProcessed());
 		for(int i=0; i<MAX; i++)
 		{
 			System.out.println(layer1.GetPerceptron(i).GetOutput());
-			// testando comit
 		}
 	}
 }

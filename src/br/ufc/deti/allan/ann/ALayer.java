@@ -45,7 +45,7 @@ public class ALayer
 			perceptrons.set(index, perceptron);
 		}
 		else
-			System.out.println("index "+ Integer.toString(index) +" not exists");
+			System.out.println("index "+ Integer.toString(index) +" for perceptron not exists");
 	}
 	
 	public APerceptron GetPerceptron(int index)

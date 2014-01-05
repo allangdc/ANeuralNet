@@ -48,6 +48,7 @@ public class APerceptron extends Thread
 		for(int i=0; i<perceptron.GetNInputs(); i++)
 		{
 			input.add(perceptron.GetInput(i));
+			weight.add(perceptron.GetWeight(i));
 		}
 		semaphore = new Semaphore(semaphore.availablePermits());
 		processed = perceptron.IsProcessed();
@@ -85,7 +86,10 @@ public class APerceptron extends Thread
 	{
 		input.clear();
 		for(int i=0; i<numberInputs; i++)
+		{
 			input.add(null);
+			weight.add(null);
+		}
 		processed=false;
 	}
 	
@@ -97,7 +101,6 @@ public class APerceptron extends Thread
 	 */
 	public int GetNInputs()
 	{
-		System.out.println("SIZE="+Integer.toString(input.size()));
 		return input.size();
 	}
 	
@@ -106,7 +109,7 @@ public class APerceptron extends Thread
 		for(int i=0; i<input.size(); i++)
 		{
 			double x = rnd.nextDouble()*2-1;
-			SetInput(i, 2*x);
+			SetWeight(i, 2*x);
 		}
 		bias = rnd.nextDouble()*2-1;
 		processed=false;
@@ -124,7 +127,16 @@ public class APerceptron extends Thread
 		if(index < input.size())
 			input.set(index, value);
 		else
-			System.out.println("index "+ Integer.toString(index) +" not exists");
+			System.out.println("index "+ Integer.toString(index) +" for input not exists");
+	}
+	
+	public void SetWeight(int index, double value)
+	{
+		processed=false;
+		if(index < weight.size())
+			weight.set(index, value);
+		else
+			System.out.println("index "+ Integer.toString(index) +" for weight not exists");
 	}
 	
 	public Double GetInput(int index)
@@ -133,7 +145,18 @@ public class APerceptron extends Thread
 			return input.get(index);
 		else
 		{
-			System.out.println("index "+ Integer.toString(index) +" not exists");
+			System.out.println("index "+ Integer.toString(index) +" input not exists");
+			return null;
+		}
+	}
+	
+	public Double GetWeight(int index)
+	{
+		if(index < weight.size())
+			return weight.get(index);
+		else
+		{
+			System.out.println("index "+ Integer.toString(index) +" weight not exists");
 			return null;
 		}
 	}
@@ -151,17 +174,15 @@ public class APerceptron extends Thread
 	//@Override
 	public void run() 
 	{
-		// TODO Auto-generated method stub
 		try 
 		{
 			if(semaphore!=null)
 				semaphore.acquire();
 			double sum=bias;
-			for(int i=0; i<input.size(); i++)
-			{
-				sum += GetInput(i);
-				output = ActivationFunction(sum);
-			}
+			for(int i=0; i<GetNInputs(); i++)
+				sum += GetInput(i)*GetWeight(i);
+			output = ActivationFunction(sum);
+			processed=true;
 		} catch (InterruptedException e) 
 		{
 			// TODO Auto-generated catch block
@@ -171,6 +192,5 @@ public class APerceptron extends Thread
 			if(semaphore!=null)
 				semaphore.release();
 		}
-		processed=true;
 	}
 }
