@@ -7,8 +7,11 @@ import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
 /**
+ * This class implements the concept of layers in a neural network.
+ * In it we have stored a set of perceptrons,
+ * may be a layer of input, output or hidden layer.
+ * 
  * @author allan
- *
  */
 public class ALayer 
 {

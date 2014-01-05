@@ -40,7 +40,7 @@ public class APerceptron extends Thread
 	/**
 	 * The copy constructor
 	 * 
-	 * @param perceptron
+	 * @param	perceptron		the object to be copied. 
 	 */
 	public APerceptron(APerceptron perceptron)
 	{
@@ -57,7 +57,7 @@ public class APerceptron extends Thread
 	/**
 	 * Informs if the perceptron has processed its inputs.
 	 * 
-	 * @return boolean
+	 * @return boolean	Return true if a perceptron has processed 
 	 * @author Allan
 	 */
 	public boolean IsProcessed()
@@ -68,7 +68,7 @@ public class APerceptron extends Thread
 	/**
 	 * Loads a semaphore object. Useful for managing the processing of several perceptrons.
 	 * 
-	 * @param semaphore
+	 * @param semaphore		This Semaphore object is to control competitions in threads.
 	 * @author Allan
 	 */
 	public void SetSemaphore(Semaphore semaphore)
@@ -79,7 +79,7 @@ public class APerceptron extends Thread
 	/**
 	 * Allocates a certain number of inputs to the perceptron.
 	 * 
-	 * @param numberInputs
+	 * @param numberInputs	Select the number of inputs that must be a perceptron.
 	 * @author Allan
 	 */
 	public void SetNInputs(int numberInputs)
@@ -96,7 +96,7 @@ public class APerceptron extends Thread
 	/**
 	 * Informs how many inputs were allocated.
 	 * 
-	 * @return int - size of vector
+	 * @return integer		Return the number of inputs of the perceptron.
 	 * @author Allan
 	 */
 	public int GetNInputs()
@@ -104,6 +104,11 @@ public class APerceptron extends Thread
 		return input.size();
 	}
 	
+	/**
+	 * Initializes the weights of the perceptron randomly.
+	 * 
+	 * @author Allan
+	 */
 	public void Init()
 	{
 		for(int i=0; i<input.size(); i++)
@@ -115,12 +120,24 @@ public class APerceptron extends Thread
 		processed=false;
 	}
 	
+	/**
+	 * Overload of method Init with the SetNInputs
+	 * 
+	 * @param numberInputs		Select the number of inputs that must be a perceptron.
+	 * @author Allan
+	 */
 	public void Init(int numberInputs)
 	{
 		SetNInputs(numberInputs);
 		Init();
 	}
 	
+	/**
+	 * Set a value of determinate input
+	 * 
+	 * @param index		Select the input to be assigned the value.
+	 * @param value		Value to be assigned to the selected input.
+	 */
 	public void SetInput(int index, double value)
 	{
 		processed=false;
@@ -130,6 +147,12 @@ public class APerceptron extends Thread
 			System.out.println("index "+ Integer.toString(index) +" for input not exists");
 	}
 	
+	/**
+	 * Set a value of determinate weight
+	 * 
+	 * @param index
+	 * @param value
+	 */
 	public void SetWeight(int index, double value)
 	{
 		processed=false;
@@ -139,6 +162,12 @@ public class APerceptron extends Thread
 			System.out.println("index "+ Integer.toString(index) +" for weight not exists");
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param index
+	 * @return
+	 */
 	public Double GetInput(int index)
 	{
 		if(index < input.size())
