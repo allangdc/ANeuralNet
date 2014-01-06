@@ -150,8 +150,8 @@ public class APerceptron extends Thread
 	/**
 	 * Set a value of determinate weight
 	 * 
-	 * @param index
-	 * @param value
+	 * @param index		Select the weight to be assigned the value.
+	 * @param value		Value to be assigned to the selected weight.
 	 */
 	public void SetWeight(int index, double value)
 	{
@@ -163,10 +163,10 @@ public class APerceptron extends Thread
 	}
 	
 	/**
+	 * Reads a specified input of a perceptron.
 	 * 
-	 * 
-	 * @param index
-	 * @return
+	 * @param index		Select the input to be read.
+	 * @return The determined input if exists.
 	 */
 	public Double GetInput(int index)
 	{
