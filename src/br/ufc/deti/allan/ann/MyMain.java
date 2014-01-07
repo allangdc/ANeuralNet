@@ -26,6 +26,7 @@ public class MyMain
 		for(int i=0; i<MAX; i++)
 		{
 			System.out.println(layer1.GetPerceptron(i).GetOutput());
+			//teste do git
 		}
 	}
 }
